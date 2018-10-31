@@ -1,6 +1,6 @@
-import pygame, sys
+import pygame
 from pygame.locals import *
-
+import sys
 from speechyesno import *
 from pye import *
 import os
@@ -8,9 +8,9 @@ import os
 
 from pye import *
 BLACK =    (0,  0,  0)
-WHITE =    (255,255,255)#white color in RGB format
+WHITE =    (255,255,255)
 
-FPS = 5
+FPS = 10
  
 def main():
     pygame.init()
