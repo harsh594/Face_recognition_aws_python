@@ -96,6 +96,7 @@ def xmain():
 # cleanup
  cv2.destroyAllWindows()
  stream.release()
+ 
  print("\nImages stored in local storage: %s"%folderPath) 
  s3 = boto3.client('s3')
  bucket_name = 'rtfrc1'
@@ -119,9 +120,9 @@ def xmain():
  rek=boto3.client('rekognition','us-east-1')
  s4 = boto3.resource('s3')
  
- l=[]
- r=[]
- #prefix="1"
+ l = []
+ r = []
+ prefix="1"
  print("\n-----------------FACE RECOGNITION WILL START---------------------------")
  bucket=s4.Bucket('testrekcomprtfrc')
  bucket1=s4.Bucket('rtfrc1')
@@ -162,15 +163,15 @@ def xmain():
  for i in l:
    print(i)
  k=[]
- folderN = "SUSPECTED"                                                        # creating the person or user folder
+ folderN = "SUSPECTED PERSONS"                                                        # creating the person or user folder
  folderP= os.path.join(os.path.dirname(os.path.realpath('__file__')), folderN)
  if not os.path.exists(folderP):
-    os.makedirs(folderP)
+    os.makedirs(folderPerson)
  for i in r:
-   k.append(i+'.jpg')
+   k.append(i+'.jpeg')
  if k==[]:
   for fileName in os.listdir(folderPath):
-    shutil.copy(folderPath+'\\'+fileName, folderP)
+    shutil.copy(folderPath+'\\'+fileName, folderPerson)
     os.remove(folderPath+"\\"+fileName)  
   pass
  else:    
@@ -178,14 +179,12 @@ def xmain():
   for fileName in fileList:
   
    for i in k:
-    
-     
      if fileName==i:  
       os.remove(folderPath+"\\"+fileName)
       break
      else:
        if i==k[len(k)-1]:
-        shutil.copy(folderPath+'\\'+fileName, folderP)
+        shutil.copy(folderPath+'\\'+fileName, folderPerson)
         os.remove(folderPath+"\\"+fileName)
         break
        else:
